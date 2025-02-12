@@ -1,29 +1,32 @@
 package net.javaguides.stockmanagement.model;
 
-public class produit {
+public class Produit {
 	private int id;
 	private String name;
 	private String descreption;
 	private int quantity;
 	private int price;
+	private String category ;
 	
 	
-	public produit(int id, String name, String descreption, int quantity, int price) {
+	public Produit(int id, String name, String descreption, int quantity, int price, String category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.descreption = descreption;
 		this.quantity = quantity;
 		this.price = price;
+		this.category = category;
 	}
 	
 	
-	public produit(String name, String descreption, int quantity, int price) {
+	public Produit(String name, String descreption, int quantity, int price, String category) {
 		super();
 		this.name = name;
 		this.descreption = descreption;
 		this.quantity = quantity;
 		this.price = price;
+		this.category =category;
 	}
 
 	//getters and setters
@@ -57,6 +60,17 @@ public class produit {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	
 
 }

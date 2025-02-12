@@ -1,7 +1,8 @@
 package net.javaguides.stockmanagement.dao;
 import java.sql.*;
 
-import net.javaguides.stockmanagement.model.produit;
+import net.javaguides.stockmanagement.model.Produit;
+
 
 public class produitDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/datastock?useSSL=false";
@@ -9,13 +10,13 @@ public class produitDAO {
     private String jdbcPassword = "admin";
     
     private static final String INSERT_PRODUCTS_SQL = "INSERT INTO stockmaster" + 
-    " (name,descreption,quantity,price) VALUES " + "(?,?,?,?);" ;
+    " (name,descreption,quantity,price,category) VALUES " + "(?,?,?,?,?);" ;
     
-    private static final String SELECT_PRODUCT_By_ID = "SELECT id,name,descreption,quantity,price FROM stockmaster WHERE id=?";
+    private static final String SELECT_PRODUCT_By_ID = "SELECT id,name,descreption,quantity,price,category FROM stockmaster WHERE id=?";
     private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM stockmaster ;";
     private static final String DELETE_PRODUCT_SQL = "DELETE FROM stockmaster WHERE id =?;";
-    private static final String UPDATE_PRODUCTS_SQL = "UPDATE stockmaster SET name = ?,descreption = ?, "
-    		+ "quantity=?, price=? WHERE id = ?;";
+    private static final String UPDATE_PRODUCTS_SQL = "UPDATE stockmaster SET name = ?,descreption = ?"
+    		+ "quantity=?, price=?,category = ? WHERE id = ?;";
     
     protected Connection getConnection() {
     	Connection connection = null ;
@@ -32,13 +33,14 @@ public class produitDAO {
         return connection;
     }
     //create ;insert product
-    public void inserProduct(produit produit) throws SQLException{
+    public void inserProduct(Produit produit) throws SQLException{
     	try(Connection connection = getConnection();
-    			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)){
-    		preparedStatement.setString(1, produit.getName());
-    		preparedStatement.setString(2, produit.getDescreption());
-    		preparedStatement.setInt(3, produit.getQuantity());
-    		preparedStatement.setInt(4, produit.getPrice());
+    		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)){
+    		preparedStatement.setString(2, produit.getName());
+    		preparedStatement.setString(3, produit.getDescreption());
+    		preparedStatement.setInt(4, produit.getQuantity());
+    		preparedStatement.setInt(5, produit.getPrice());
+    		preparedStatement.setString(6, produit.getCategory());
     		//exécuter la requête
     		preparedStatement.executeUpdate();
     		
@@ -48,8 +50,18 @@ public class produitDAO {
     				
     }
     //update product
-    public void 
+   // public boolean updateProduct(Produit produit) throws SQLException {
+   // 	boolean rowUpdated;
+   // 	try(Connection connection = getConnection();
+   // 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCTS_SQL)){
+    		
+    			
+    //		}
+    //	}
+    	
+    	
+    }
     
     
     
-}
+
