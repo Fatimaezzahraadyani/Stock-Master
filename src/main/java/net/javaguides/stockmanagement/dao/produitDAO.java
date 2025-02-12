@@ -3,8 +3,8 @@ import java.sql.*;
 
 public class produitDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/datastock?useSSL=false";
-	private String jdbcUsername = "root";
-    private String jdbcPassword = "root";
+	private String jdbcUsername = "admin";
+    private String jdbcPassword = "admin";
     
     private static final String INSERT_PRODUCTS_SQL = "INSERT INTO stockmaster" + 
     " (name,descreption,quantity,price) VALUES " + "(?,?,?,?);" ;
@@ -28,7 +28,17 @@ public class produitDAO {
             e.printStackTrace();     //si le driver jdbc n'est pas trouver
         }
         return connection;
+    }
+    //create ;insert product
+    public void inserProduct(produit produit) throws SQLException{
+    	try(Connection connection = getConnection();
+    			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)){
+    		preparedStatement.setString(1, produit.getName());
+    	}
+    			
+    			
     	
     }
+    
     
 }
