@@ -1,6 +1,8 @@
 package net.javaguides.stockmanagement.dao;
 import java.sql.*;
 
+import net.javaguides.stockmanagement.model.produit;
+
 public class produitDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/datastock?useSSL=false";
 	private String jdbcUsername = "admin";
@@ -34,11 +36,20 @@ public class produitDAO {
     	try(Connection connection = getConnection();
     			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)){
     		preparedStatement.setString(1, produit.getName());
+    		preparedStatement.setString(2, produit.getDescreption());
+    		preparedStatement.setInt(3, produit.getQuantity());
+    		preparedStatement.setInt(4, produit.getPrice());
+    		//exécuter la requête
+    		preparedStatement.executeUpdate();
+    		
+    	}catch (Exception e){
+    		e.printStackTrace();
     	}
-    			
-    			
-    	
+    				
     }
+    //update product
+    public void 
+    
     
     
 }
