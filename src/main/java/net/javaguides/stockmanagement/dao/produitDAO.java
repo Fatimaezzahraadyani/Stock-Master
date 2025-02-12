@@ -4,7 +4,7 @@ import java.sql.*;
 import net.javaguides.stockmanagement.model.Produit;
 
 
-public class produitDAO {
+public class ProduitDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/datastock?useSSL=false";
 	private String jdbcUsername = "admin";
     private String jdbcPassword = "admin";
@@ -36,29 +36,49 @@ public class produitDAO {
     public void inserProduct(Produit produit) throws SQLException{
     	try(Connection connection = getConnection();
     		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCTS_SQL)){
-    		preparedStatement.setString(2, produit.getName());
-    		preparedStatement.setString(3, produit.getDescreption());
-    		preparedStatement.setInt(4, produit.getQuantity());
-    		preparedStatement.setInt(5, produit.getPrice());
-    		preparedStatement.setString(6, produit.getCategory());
+    		preparedStatement.setString(1, produit.getName());
+    		preparedStatement.setString(2, produit.getDescreption());
+    		preparedStatement.setInt(3, produit.getQuantity());
+    		preparedStatement.setInt(4, produit.getPrice());
+    		preparedStatement.setString(5, produit.getCategory());
     		//exécuter la requête
     		preparedStatement.executeUpdate();
-    		
     	}catch (Exception e){
     		e.printStackTrace();
     	}
     				
     }
     //update product
-   // public boolean updateProduct(Produit produit) throws SQLException {
-   // 	boolean rowUpdated;
-   // 	try(Connection connection = getConnection();
-   // 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCTS_SQL)){
+    public boolean updateProduct(Produit produit) throws SQLException {
+    	boolean rowUpdated;
+    	try(Connection connection = getConnection();
+    		PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCTS_SQL)){
+    		statement.setString(1, produit.getName());
+    		statement.setString(2, produit.getDescreption());
+    		statement.setInt(3, produit.getQuantity());
+    		statement.setInt(4, produit.getPrice());
+    		statement.setString(5, produit.getCategory());
     		
+    		rowUpdated = statement.executeUpdate() > 0;
     			
-    //		}
-    //	}
+    		}
+    	return rowUpdated;
+    	}
     	
+    //select product by id
+    public Produit selectProduit(int id) throws SQLException {
+    	Produit produit = null;
+    	try(Connection connection = getConnection();
+    			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_By_ID)){
+    		preparedStatement.setInt(1, id);
+    		System.out.println(preparedStatement);
+    		
+    		ResultSet rs = preparedStatement.executeQuery();
+    		
+    	}
+    	
+    	return produit;
+    }
     	
     }
     
