@@ -5,11 +5,14 @@ public class Produit {
 	private String name;
 	private String descreption;
 	private int quantity;
-	private int price;
+	private float price;
 	private String category ;
 	
 	
-	public Produit(int id, String name, String descreption, int quantity, int price, String category) {
+	
+	public Produit () {}
+	
+	public Produit(int id, String name, String descreption, int quantity, float price, String category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,7 +23,7 @@ public class Produit {
 	}
 	
 	
-	public Produit(String name, String descreption, int quantity, int price, String category) {
+	public Produit(String name, String descreption, int quantity, float price, String category) {
 		super();
 		this.name = name;
 		this.descreption = descreption;
@@ -54,10 +57,10 @@ public class Produit {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
