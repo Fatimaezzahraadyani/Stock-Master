@@ -95,7 +95,7 @@ public class ProduitDAO {
     public List<Produit> selectAllProducts() {
     	List<Produit> produits = new ArrayList<>();
     	try(Connection connection = getConnection();
-    		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_By_ID)){
+    		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS)){
     		System.out.println(preparedStatement);
     		
     		ResultSet rs = preparedStatement.executeQuery();
@@ -106,7 +106,7 @@ public class ProduitDAO {
     			int quantity = rs.getInt("quantity");
     			int price = rs.getInt("price");
     			String category = rs.getString("category");
-    			//produit = new Produit(id,name,descreption,quantity,price,category);
+    			produits.add(new Produit(name,descreption,quantity,price,category));
     		}
     	}catch (SQLException e) {
     		e.printStackTrace();

@@ -114,11 +114,11 @@ public class produitServlets extends HttpServlet {
 		int price = Integer.parseInt(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		
-		Produit book = new Produit();
+		Produit book = new Produit(id,name,descreption,quantity,price,category);
 		ProduitDao.updateProduct(book);
 		response.sendRedirect("list");
 	}
-	private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws  SQLException, IOException{
 		// TODO Auto-generated method stub
 		int id = Integer.parseInt(getInitParameter("id"));
 		produitDAO.deleteProduct(id);
