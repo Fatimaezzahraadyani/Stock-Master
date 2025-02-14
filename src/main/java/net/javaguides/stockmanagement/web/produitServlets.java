@@ -80,13 +80,13 @@ public class produitServlets extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        RequestDispatcher dispatcher = request.getRequestDispatcher("produit-form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
 }
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Produit existingProduit = produitDAO.selectProduct(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("produit-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		request.setAttribute("produit", existingProduit);
 	    dispatcher.forward(request, response);
 	}
