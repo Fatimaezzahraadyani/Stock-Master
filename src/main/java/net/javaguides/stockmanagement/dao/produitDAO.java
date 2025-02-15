@@ -17,7 +17,7 @@ public class ProduitDAO {
     private static final String SELECT_PRODUCT_By_ID = "SELECT id,name,descreption,quantity,price,category FROM produits WHERE id=?";
     private static final String SELECT_ALL_PRODUCTS = "SELECT * FROM produits;";
     private static final String DELETE_PRODUCT_SQL = "DELETE FROM produits WHERE id =?;";
-    private static final String UPDATE_PRODUCTS_SQL = "UPDATE produits SET name = ?,descreption = ?"
+    private static final String UPDATE_PRODUCTS_SQL = "UPDATE produits SET name = ?,descreption = ?,"
     		+ "quantity=?, price=?,category = ? WHERE id = ?;";
     
     protected Connection getConnection() {
@@ -81,7 +81,7 @@ public class ProduitDAO {
     			String name = rs.getString("name");
     			String descreption = rs.getString("descreption");
     			int quantity = rs.getInt("quantity");
-    			int price = rs.getInt("price");
+    			float price = rs.getFloat("price");
     			String category = rs.getString("category");
     			produit = new Produit(id,name,descreption,quantity,price,category);
     		}
@@ -95,18 +95,19 @@ public class ProduitDAO {
     public List<Produit> selectAllProducts() {
     	List<Produit> produits = new ArrayList<>();
     	try(Connection connection = getConnection();
-    		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS)){
+    		PreparedStatement preparedStatement = connection.prepareStatement()){
     		System.out.println(preparedStatement);
     		
     		ResultSet rs = preparedStatement.executeQuery();
     		
     		while(rs.next()) {
+    			int id = rs.getInt("id");
     			String name = rs.getString("name");
     			String descreption = rs.getString("descreption");
     			int quantity = rs.getInt("quantity");
     			int price = rs.getInt("price");
     			String category = rs.getString("category");
-    			produits.add(new Produit(name,descreption,quantity,price,category));
+    			produits.add(new Produit(id,name,descreption,quantity,price,category));
     		}
     	}catch (SQLException e) {
     		e.printStackTrace();

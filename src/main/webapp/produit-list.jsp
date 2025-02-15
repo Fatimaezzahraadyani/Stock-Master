@@ -61,6 +61,9 @@
                                         <c:out value="${produit.descreption}" />
                                     </td>
                                     <td>
+                                        <c:out value="${produit.quantity}" />
+                                    </td>
+                                    <td>
                                         <c:out value="${produit.category}" />
                                     </td>
                                     <td>

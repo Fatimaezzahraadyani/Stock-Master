@@ -17,15 +17,15 @@ import net.javaguides.stockmanagement.model.Produit;
 /**
  * Servlet implementation class produitServlets
  */
-@WebServlet("/produitServlets")
+@WebServlet("/")
 public class produitServlets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProduitDAO produitDAO;
-	public void init() {
-		produitDAO = new ProduitDAO();
-	}
-	private ProduitDAO ProduitDao = new ProduitDAO();
+	//private ProduitDAO produitDAO;
+	//public void init() {
+	//	produitDAO = new ProduitDAO();
+	//}
+	private ProduitDAO produitDao = new ProduitDAO();
 	 
        
     /**
@@ -62,6 +62,10 @@ public class produitServlets extends HttpServlet {
 			case "/delete" : 
 				deleteProduct(request,response);
 				break;
+			case "/list" : 
+				listProduct(request,response);
+				break;
+				
 			default : 
 				listProduct(request,response);
 				break;
@@ -72,7 +76,7 @@ public class produitServlets extends HttpServlet {
 	}
 	
 	private void listProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Produit> ListProduit = produitDAO.selectAllProducts();
+		List<Produit> ListProduit = produitDao.selectAllProducts();
 		request.setAttribute("listProduit", ListProduit);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("produit-list.jsp");
 	     dispatcher.forward(request, response);
@@ -85,7 +89,7 @@ public class produitServlets extends HttpServlet {
 }
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		Produit existingProduit = produitDAO.selectProduct(id);
+		Produit existingProduit = produitDao.selectProduct(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		request.setAttribute("produit", existingProduit);
 	    dispatcher.forward(request, response);
@@ -102,7 +106,7 @@ public class produitServlets extends HttpServlet {
 		float price = Float.parseFloat(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		Produit newProduct= new Produit(name,descreption,quantity,price,category);
-		ProduitDao.insertProduct(newProduct);
+		produitDao.insertProduct(newProduct);
 		response.sendRedirect("list");
 	}
 	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws  SQLException, IOException{
@@ -111,17 +115,17 @@ public class produitServlets extends HttpServlet {
 		String name = request.getParameter("name");
 		String descreption = request.getParameter("descreption");
 		String category = request.getParameter("category") ;
-		int price = Integer.parseInt(request.getParameter("price"));
+		float price = Float.parseFloat(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		
 		Produit book = new Produit(id,name,descreption,quantity,price,category);
-		ProduitDao.updateProduct(book);
+		produitDao.updateProduct(book);
 		response.sendRedirect("list");
 	}
 	private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws  SQLException, IOException{
 		// TODO Auto-generated method stub
-		int id = Integer.parseInt(getInitParameter("id"));
-		produitDAO.deleteProduct(id);
+		int id = Integer.parseInt(request.getParameter("id"));
+		produitDao.deleteProduct(id);
 		response.sendRedirect("list");
 	}
 
