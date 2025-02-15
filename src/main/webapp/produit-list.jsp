@@ -44,33 +44,25 @@
                                 <th>Quantity</th>
                                 <th>Category</th>
                                 <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="user" items="${listProduit}">
+                            <c:forEach var="produit" items="${listProduit}">
 
                                 <tr>
-                                    <td>
-                                        <c:out value="${produit.id}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${produit.name}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${produit.descreption}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${produit.quantity}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${produit.category}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${produit.price}" />
-                                    </td>
-                                    <td><a href="edit?id=<c:out value='${produit.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=<c:out value='${produit.id}' />">Delete</a></td>
-                                </tr>
+                            <td><c:out value="${produit.id}" /></td>
+                            <td><c:out value="${produit.name}" /></td>
+                            <td><c:out value="${produit.descreption}" /></td>
+                            <td><c:out value="${produit.quantity}" /></td>
+                            <td><c:out value="${produit.category}" /></td>
+                            <td><c:out value="${produit.price}" /></td>
+                            <td>
+                                <a href="edit?id=<c:out value='${produit.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <a href="delete?id=<c:out value='${produit.id}' />">Delete</a>
+                            </td>
+                        </tr>
                             </c:forEach>
                             <!-- } -->
                         </tbody>

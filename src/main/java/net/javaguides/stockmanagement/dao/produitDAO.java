@@ -95,7 +95,7 @@ public class ProduitDAO {
     public List<Produit> selectAllProducts() {
     	List<Produit> produits = new ArrayList<>();
     	try(Connection connection = getConnection();
-    		PreparedStatement preparedStatement = connection.prepareStatement()){
+    		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS)){
     		System.out.println(preparedStatement);
     		
     		ResultSet rs = preparedStatement.executeQuery();

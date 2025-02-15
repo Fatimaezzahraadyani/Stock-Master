@@ -62,7 +62,7 @@ public class produitServlets extends HttpServlet {
 			case "/delete" : 
 				deleteProduct(request,response);
 				break;
-			case "/list" : 
+			case "/produit-list.jsp" : 
 				listProduct(request,response);
 				break;
 				
